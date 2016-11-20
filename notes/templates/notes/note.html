@@ -1,0 +1,54 @@
+{% extends 'base.html' %} {% load markdown %} {% block title %}notes | MarkNote{% endblock %} {% block body %}
+<div class="ui borderless main menu">
+    <div class="ui container">
+        <a href="/" class="header item">
+            MarkNote
+        </a>
+        <a href="/edit/{{note.pk}}" class="ui icon right  item">
+            <div>Edit</div>
+        </a>
+        <a class="ui icon item">
+            <div class="button" onclick="confirm()">
+                Delete
+            </div>
+        </a>
+    </div>
+</div>
+
+<div class="ui small modal">
+    <i class="close icon"></i>
+    <div class="header">
+        Delete this note.
+    </div>
+    <div class="content">
+        <div class="description">
+            <p>Plaese confirm again.</p>
+        </div>
+    </div>
+    <div class="actions">
+        <div class="ui negative button">
+            NO
+        </div>
+        <div class="ui positive right labeled icon button" onclick="submit()">
+            YES
+        </div>
+    </div>
+</div>
+
+<div class="ui text container ">
+    <form method="POST" id="note" action="/delete/{{note.pk}}">
+        <div class="ui card">
+            <div class="content">
+                <div class="header">{{ note.title }}</div>
+                <div class="meta">{{ note.created_time|date:"d M Y" }}</div>
+                <a class="ui teal ribbon label">分类</a>
+                <div class="description">
+                    <p>{{ note.content | mymarkdown }}</p>
+                </div>
+            </div>
+        </div>
+        {% csrf_token %}<input type="hidden" type="submit" value="DELETE ">
+    </form>
+</div>
+
+{% endblock %}

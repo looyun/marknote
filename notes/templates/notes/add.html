@@ -1,0 +1,50 @@
+{% extends 'base.html' %} {% block title %}edit | MarkNote{% endblock %} {% block body %}
+<div class="ui borderless main menu">
+    <div class="ui container">
+        <a href="/" class="header item">
+            MarkNote
+        </a>
+        <a href="#" class="ui icon right  item">
+            <div class="button" onclick="submit()">Save</div>
+        </a>
+    </div>
+</div>
+<div class="ui text container">
+
+    <form class="ui large reply form" id="note" method="POST" action="/add/">
+
+        {% csrf_token %}
+        <div class="field">
+            <input type="text" name="title" placeholder="请输入标题">
+        </div>
+
+        <div class="ui left pointing  labeled icon dropdown button">
+            <i class="tags icon"></i>
+            <span class="text">Tags</span>
+            <div class="menu">
+                <div class="ui transparent left icon input">
+                    <i class="add icon"></i>
+                    <input type="text" name="add" placeholder="Add...">
+                </div>
+                <div class="divider"></div>
+                <div class="item">
+                    <div class="ui empty circular label"></div>
+                    重要
+                </div>
+                <div class="item">
+                    <div class="ui empty circular label"></div>
+                    公告
+                </div>
+                <div class="item">
+                    <div class="ui empty circular label"></div>
+                    讨论
+                </div>
+            </div>
+        </div>
+        <div class="field">
+            <textarea rows="10" name="content" placeholder="请输入正文{{ note.content }}">{{ note.content }}</textarea>
+        </div>
+
+    </form>
+</div>
+{% endblock %}
